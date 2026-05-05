@@ -372,7 +372,22 @@ return(
   </div>
   {saved.length===0&&<div style={{textAlign:"center",padding:"2rem",color:"#ADB5BD",fontSize:"0.9rem"}}>🔖 혜택을 저장하면 예상 수혜액을 계산해드려요</div>}
   {saved.map(s=>{const a=parseAmount(s);return a?(<div key={s["서비스ID"]} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"0.875rem 0",borderBottom:"1px solid #F1F3F5"}}><div style={{fontSize:"0.9rem",color:"#1A1A2E",flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",marginRight:"1rem"}}>{s["서비스명"]}</div><div style={{fontWeight:700,color:"#4C6EF5",flexShrink:0}}>{a.type==="월"?`연 ${(a.amount*12).toLocaleString()}만원`:`${a.amount.toLocaleString()}만원`}</div></div>):null;})}
-  <button onClick={()=>{const text=`나 정부 혜택으로 최대 ${totalBenefit.toLocaleString()}만원 받을 수 있대! (예상 금액, 심사 결과에 따라 다를 수 있음) alda-xi.vercel.app`;if(navigator.share){navigator.share({text}).catch(()=>{});}else{window.open("https://sharer.kakao.com/talk/friends/picker/link");}}} style={{width:"100%",padding:"1rem",fontSize:"1rem",fontWeight:700,background:"#FEE500",color:"#1A1A2E",border:"none",borderRadius:"14px",cursor:"pointer",marginTop:"1.5rem",minHeight:"44px"}}>💬 카카오톡으로 공유하기</button>
+  <button onClick={()=>{
+  const count = saved.length;
+  const amount = totalBenefit;
+  let text = "";
+  if(amount > 0){
+    text = `🇰🇷 정부 혜택 ${count}개 발견!\n연간 최대 ${amount.toLocaleString()}만원 받을 수 있어요 (예상)\n\n나도 모르던 정부 지원금, 알다에서 1분만에 찾았어요 👇\nalda-xi.vercel.app`;
+  } else {
+    text = `🇰🇷 나한테 맞는 정부 혜택, 알다에서 찾아봤어요\n임신·출산·주거·취업 혜택을 1분만에 확인해보세요 👇\nalda-xi.vercel.app`;
+  }
+  if(navigator.share){
+    navigator.share({title:"알다 - 정부혜택 찾기", text}).catch(()=>{});
+  } else {
+    const encoded = encodeURIComponent(text);
+    window.open(`https://sharer.kakao.com/talk/friends/picker/link?text=${encoded}`);
+  }
+}} style={{width:"100%",padding:"1rem",fontSize:"1rem",fontWeight:700,background:"#FEE500",color:"#1A1A2E",border:"none",borderRadius:"14px",cursor:"pointer",marginTop:"1.5rem",minHeight:"44px"}}>💬 카카오톡으로 공유하기</button>
 </div>)}
 </div>
 
