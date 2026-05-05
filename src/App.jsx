@@ -10,7 +10,7 @@ function getIncomeOptions(n) {
     { value:"30",  label:`월 ${Math.round(base*0.3)}만원 이하`,  sub:"기초생활수급자 수준" },
     { value:"50",  label:`월 ${Math.round(base*0.5)}만원 이하`,  sub:"차상위계층 수준" },
     { value:"75",  label:`월 ${Math.round(base*0.75)}만원 이하`, sub:"중위소득 75%" },
-    { value:"100", label:`월 ${Math.round(base*1.0)}만원 이하`,  sub:"중위소득 100% · 중간 소득" },
+    { value:"100", label:`월 ${Math.round(base*1.0)}만원 이하`,  sub:"중위소득 1h00% · 중간 소득" },
     { value:"150", label:`월 ${Math.round(base*1.5)}만원 이하`,  sub:"중위소득 150%" },
     { value:"200+",label:`월 ${Math.round(base*1.5)}만원 초과`,  sub:"중위소득 150% 초과" },
   ];
@@ -183,7 +183,7 @@ export default function ALDA() {
   },[]);
 
   const openModal = useCallback(async(service)=>{
-    setModal(service); setDetail(null); setDetailLoading(true);
+    setDetail(null); setDetailLoading(true); setModal(service);
     const id=service["서비스ID"];
     if(id) {
       try {
