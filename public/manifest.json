@@ -1,13 +1,19 @@
 {
-    "name": "ALDA - 정부 혜택 찾기",
-    "short_name": "ALDA",
-    "description": "내 상황에 맞는 정부 혜택을 찾아드려요",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#F7F8FA",
-    "theme_color": "#4C6EF5",
-    "orientation": "portrait",
-    "icons": [
-          { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
-    ]
+  "name": "알다 - 정부혜택 찾기",
+  "short_name": "알다",
+  "description": "내 상황에 꼭 맞는 정부 혜택을 찾아드려요",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4C6EF5",
+  "theme_color": "#4C6EF5",
+  "orientation": "portrait",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }
