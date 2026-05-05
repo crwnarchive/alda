@@ -1,24 +1,5 @@
 {
-  "version": 2,
   "buildCommand": "vite build",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "functions": {
-    "api/claude.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/claude",
-      "dest": "/api/claude.js"
-    },
-    {
-      "src": "/(.*)",
-      "headers": {
-        "Cache-Control": "no-cache, no-store, must-revalidate"
-      },
-      "dest": "/index.html"
-    }
-  ]
+  "framework": "vite"
 }
