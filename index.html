@@ -2,83 +2,42 @@
 <html lang="ko">
   <head>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <!-- ── 기본 SEO ── -->
-    <title>ALDA - 나에게 맞는 정부 혜택 찾기</title>
-    <meta name="description" content="임신, 출산, 주거, 취업 등 내 상황에 딱 맞는 정부 혜택을 빠르게 찾아드려요. 행정안전부 공공서비스 10,000개 실시간 연동." />
-    <meta name="keywords" content="정부혜택, 복지, 공공서비스, 임신지원, 출산지원, 주거지원, 청년지원, 보조금24" />
-    <meta name="author" content="ALDA" />
+    <title>알다 - 몰랐던 혜택을 알다</title>
+    <meta name="description" content="임신, 출산, 주거, 취업 등 내 상황에 딱 맞는 정부 혜택을 빠르게 찾아드려요. 행정안전부 공공서비스 실시간 연동." />
+    <meta name="keywords" content="정부혜택, 복지, 공공서비스, 임신지원, 출산지원, 주거지원, 청년지원, 보조금24, 알다" />
+    <meta name="author" content="알다" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://alda-xi.vercel.app" />
 
-    <!-- ── Open Graph (카카오/페이스북 공유) ── -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alda-xi.vercel.app" />
-    <meta property="og:title" content="ALDA - 나에게 맞는 정부 혜택 찾기" />
-    <meta property="og:description" content="임신·출산·주거·취업 등 내 상황에 딱 맞는 정부 혜택을 빠르게 찾아드려요. 10,000개 공공서비스 실시간 연동." />
-    <meta property="og:image" content="https://alda-xi.vercel.app/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:title" content="알다 - 몰랐던 혜택을 알다" />
+    <meta property="og:description" content="임신·출산·주거·취업 등 내 상황에 맞는 정부 혜택을 빠르게 찾아드려요." />
+    <meta property="og:site_name" content="알다" />
     <meta property="og:locale" content="ko_KR" />
-    <meta property="og:site_name" content="ALDA" />
 
-    <!-- ── Twitter Card ── -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ALDA - 나에게 맞는 정부 혜택 찾기" />
+    <meta name="twitter:title" content="알다 - 몰랐던 혜택을 알다" />
     <meta name="twitter:description" content="임신·출산·주거·취업 등 내 상황에 맞는 정부 혜택을 빠르게 찾아드려요." />
-    <meta name="twitter:image" content="https://alda-xi.vercel.app/og-image.png" />
 
-    <!-- ── PWA ── -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#4C6EF5" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />    <meta name="mobile-web-app-capable" content="yes" />
+    <!-- PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="ALDA" />
+    <meta name="apple-mobile-web-app-title" content="알다" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#4C6EF5" />
+    <link rel="manifest" href="/manifest.json" />
     <link rel="apple-touch-icon" href="/icon.svg" />
-
-    <!-- ── 파비콘 ── -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" href="/icons/icon-96.png" />
-
-    <!-- ── 폰트: Pretendard ── -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-
-    <!-- ── 구조화 데이터 ── -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "ALDA",
-      "description": "나에게 맞는 정부 혜택 찾기 서비스",
-      "url": "https://alda-xi.vercel.app",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "KRW"
-      }
-    }
-    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-
-    <!-- ── Service Worker 등록 ── -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then(reg => console.log('SW registered:', reg.scope))
-            .catch(err => console.log('SW failed:', err));
-        });
-      }
-    </script>
   </body>
 </html>
