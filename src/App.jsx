@@ -144,8 +144,8 @@ const toggleCheck=(id)=>{setChecked(prev=>({...prev,[id]:!prev[id]}));};
 const openModal=useCallback(async(service)=>{
   if(abortRef.current)abortRef.current.abort();
   const controller=new AbortController();abortRef.current=controller;
-  setDetail(null);setDetailLoading(true);setModal(service);
-  setBotHistory([]);setBotQ("");
+  setDetail(null);setDetailLoading(true);setBotHistory([]);setBotQ("");
+  setModal(service);
   const id=service["서비스ID"];
   if(id){try{const res=await fetch(`${BASE_URL}/serviceDetail?serviceKey=${API_KEY}&serviceId=${id}`,{signal:controller.signal});const json=await res.json();setDetail(json.data?.[0]||null);}catch(e){if(e.name==="AbortError")return;}}
   setDetailLoading(false);
@@ -341,7 +341,7 @@ return(
 
 {/* 타임라인 탭 */}
 {tab==="timeline"&&(<div style={{paddingTop:"1rem"}}>
-  {[{id:"prepare",label:"임신 준비",icon:"🌱",highlight:"준비 단계에서 챙길 것"},{id:"pregnant",label:"임신 중",icon:"🤱",highlight:"임신 초기 신청 필수"},{id:"birth",label:"출산 직후",icon:"👶",highlight:"60일 이내 신청 마감"},{id:"baby",label:"육아기",icon:"🍼",highlight:"만5세까지 매월 지급"},{id:"house",label:"주거 마련",icon:"🏠",highlight:"무주택 요건 먼저 확인"},{id:"job",label:"취업",icon:"💼",highlight:"청년 기간 한정 혜택"}].map((stage,i)=>{
+  {[{id:"job",label:"취업·창업",icon:"💼",highlight:"청년 기간 한정 혜택 놓치지 마세요"},{id:"marriage",label:"결혼",icon:"💍",highlight:"신혼부부 혜택은 혼인 7년 이내"},{id:"house",label:"주택 마련",icon:"🏠",highlight:"무주택 요건 먼저 확인"},{id:"prepare",label:"임신 준비",icon:"🌱",highlight:"난임 지원·엽산제 사전 신청"},{id:"pregnant",label:"임신 중",icon:"🤱",highlight:"임신 초기 신청 필수"},{id:"birth",label:"출산 직후",icon:"👶",highlight:"60일 이내 신청 마감 — 절대 놓치지 마세요"}].map((stage,i)=>{
     const isActive=(profile.pregnant&&stage.id==="pregnant")||(profile.events?.includes("newborn")&&stage.id==="birth")||(profile.events?.includes("house")&&stage.id==="house")||(profile.events?.includes("job")&&stage.id==="job");
     const relatedServices=services.filter(s=>(s["서비스분야"]||"").includes(stage.label));
     const maxBenefit=relatedServices.reduce((m,s)=>{const a=parseAmount(s);return a?Math.max(m,a.amount):m;},0);
