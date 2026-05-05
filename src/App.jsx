@@ -187,9 +187,22 @@ if(screen==="landing")return(
   <div style={{fontSize:"0.8rem",color:"#ADB5BD",background:"#EAECF0",padding:"4px 10px",borderRadius:"20px"}}>정부 혜택 가이드</div>
 </div>
 <div style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"2rem 1.5rem 1rem",textAlign:"center"}}>
-  <div style={{display:"inline-flex",alignItems:"center",gap:"6px",background:"#EEF2FF",color:"#4C6EF5",fontSize:"0.78rem",fontWeight:600,padding:"6px 14px",borderRadius:"20px",marginBottom:"1.25rem"}}>✦ 행정안전부 공공서비스 실시간 연동</div>
-  <h1 style={{fontSize:"clamp(2rem,8vw,3.2rem)",fontWeight:900,color:"#1A1A2E",lineHeight:1.2,marginBottom:"1rem",letterSpacing:"-0.02em"}}>내 상황에 꼭 맞는<br/><span style={{background:"linear-gradient(135deg,#4C6EF5,#845EF7)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>정부 혜택</span>을 찾아드려요</h1>
-  <p style={{fontSize:"1rem",color:"#6C757D",marginBottom:"2rem",lineHeight:1.7,maxWidth:"360px"}}>임신·출산·주거·취업, 인생 이벤트마다<br/>더 많은 혜택을 챙기세요</p>
+  <div style={{display:"inline-flex",alignItems:"center",gap:"6px",background:"#EEF2FF",color:"#4C6EF5",fontSize:"0.78rem",fontWeight:600,padding:"6px 14px",borderRadius:"20px",marginBottom:"1.5rem"}}>✦ 행정안전부 공공서비스 실시간 연동</div>
+
+  {/* 캐치프레이즈 */}
+  <div style={{marginBottom:"1.5rem",textAlign:"center"}}>
+    <div style={{display:"inline-block",position:"relative"}}>
+      <span style={{fontSize:"clamp(1rem,4vw,1.2rem)",fontWeight:700,color:"#ADB5BD",letterSpacing:"0.05em",display:"block",marginBottom:"0.5rem"}}>몰랐던 혜택을</span>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"0.5rem"}}>
+        <div style={{height:"2px",width:"40px",background:"linear-gradient(90deg,transparent,#4C6EF5)"}}/>
+        <span style={{fontSize:"clamp(2.2rem,9vw,3.6rem)",fontWeight:900,letterSpacing:"-0.04em",background:"linear-gradient(135deg,#4C6EF5,#845EF7)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text",lineHeight:1}}>알다</span>
+        <div style={{height:"2px",width:"40px",background:"linear-gradient(90deg,#845EF7,transparent)"}}/>
+      </div>
+    </div>
+  </div>
+
+  <h1 style={{fontSize:"clamp(1.4rem,5vw,2rem)",fontWeight:800,color:"#1A1A2E",lineHeight:1.4,marginBottom:"0.75rem",letterSpacing:"-0.02em"}}>내 상황에 꼭 맞는 정부 혜택<br/>1분만에 찾아드려요</h1>
+  <p style={{fontSize:"0.95rem",color:"#6C757D",marginBottom:"2rem",lineHeight:1.7,maxWidth:"360px"}}>임신·출산·주거·취업, 인생 이벤트마다<br/>더 많은 혜택을 챙기세요</p>
 
   {/* AI 자유입력 */}
   <div style={{width:"100%",maxWidth:"400px",marginBottom:"1rem"}}>
