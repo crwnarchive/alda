@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 const API_KEY = import.meta.env.VITE_API_KEY;
-const CLAUDE_API = "https://api.anthropic.com/v1/messages";
+const CLAUDE_API = "/api/claude";
 const BASE_URL = "https://api.odcloud.kr/api/gov24/v3";
 const MEDIAN_INCOME = { 1:239, 2:393, 3:505, 4:613, 5:718, 6:819 };
 
@@ -141,14 +141,10 @@ const runFetch=async(p)=>{setScreen("loading");setLoadingStep(0);setError(null);
 const handleSelect=useCallback(async(value)=>{const cur=STEPS[step];let np={...profile,[cur.id]:value};if(cur.id==="events"){np.pregnant=value.includes("pregnant");np.house=!value.includes("house");np.events=value;if(value.includes("pregnant"))np.pregWeek=pregWeek;if(value.includes("newborn"))np.newbornMonth=newbornMonth;}if(cur.id==="age")np.age=parseInt(value);setProfile(np);setTimeout(async()=>{if(step<STEPS.length-1)setStep(step+1);else await runFetch(np);},200);},[step,profile,pregWeek,newbornMonth]);
 const toggleSave=(s)=>{const id=s["서비스ID"];setSaved(prev=>prev.find(x=>x["서비스ID"]===id)?prev.filter(x=>x["서비스ID"]!==id):[...prev,s]);};
 const toggleCheck=(id)=>{setChecked(prev=>({...prev,[id]:!prev[id]}));};
-const openModal=useCallback(async(service)=>{
-  if(abortRef.current)abortRef.current.abort();
-  const controller=new AbortController();abortRef.current=controller;
-  setDetail(null);setDetailLoading(true);setBotHistory([]);setBotQ("");
+const openModal=useCallback((service)=>{
+  setBotHistory([]);setBotQ("");
+  setDetail(null);
   setModal(service);
-  const id=service["서비스ID"];
-  if(id){try{const res=await fetch(`${BASE_URL}/serviceDetail?serviceKey=${API_KEY}&serviceId=${id}`,{signal:controller.signal});const json=await res.json();setDetail(json.data?.[0]||null);}catch(e){if(e.name==="AbortError")return;}}
-  setDetailLoading(false);
 },[]);
 
 const handleBotSend=async(q)=>{
@@ -415,10 +411,9 @@ return(
       <button onClick={()=>{setModal(null);setBotHistory([]);}} style={{background:"none",border:"none",fontSize:"1.5rem",cursor:"pointer",color:"#ADB5BD",padding:"4px",minWidth:"44px",minHeight:"44px",flexShrink:0}}>×</button>
     </div>
     <div style={{padding:"1.25rem 1.5rem"}}>
-      {detailLoading?(<div style={{textAlign:"center",padding:"3rem",color:"#ADB5BD"}}>불러오는 중...</div>):(
-      <>
-        {(()=>{const cc=getCat(modal["서비스분야"]||"기타");const fit=calcFit(modal,profile);return(<div style={{display:"flex",gap:"0.5rem",marginBottom:"1rem",flexWrap:"wrap"}}><span style={{fontWeight:700,padding:"3px 10px",borderRadius:"20px",color:"white",background:cc.color,fontSize:"0.78rem"}}>{cc.icon} {(modal["서비스분야"]||"").split("·")[0]}</span><span style={{fontWeight:700,padding:"3px 10px",borderRadius:"20px",color:"white",background:fit.color,fontSize:"0.78rem"}}>{fit.badge}</span></div>);})()}
-        {[["지원내용",(detail?.["지원내용"]||modal["지원내용"])],["지원대상",(detail?.["지원대상"]||modal["지원대상"])],["선정기준",(detail?.["선정기준"]||modal["선정기준"])],["신청방법",(detail?.["신청방법"]||modal["신청방법"])]].map(([l,v])=>v?(<div key={l} style={{marginBottom:"1rem",paddingBottom:"1rem",borderBottom:"1px solid #F8F9FA"}}><div style={{fontWeight:700,color:"#ADB5BD",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:"0.3rem",fontSize:"0.72rem"}}>{l}</div><div style={{color:"#343A40",lineHeight:1.7,fontSize:"0.9rem"}}>{v}</div></div>):null)}
+      (<>
+        {(()=>{const cc=getCat(modal["서비스분야"]||"기타");const fit=calcFit(modal,profile);const amt=parseAmount(modal);return(<div style={{marginBottom:"1rem"}}><div style={{display:"flex",gap:"0.5rem",marginBottom:"0.75rem",flexWrap:"wrap"}}><span style={{fontWeight:700,padding:"3px 10px",borderRadius:"20px",color:"white",background:cc.color,fontSize:"0.78rem"}}>{cc.icon} {(modal["서비스분야"]||"").split("·")[0]}</span><span style={{fontWeight:700,padding:"3px 10px",borderRadius:"20px",color:"white",background:fit.color,fontSize:"0.78rem"}}>{fit.badge}</span></div>{amt&&<div style={{fontWeight:900,color:"#4C6EF5",fontSize:"1.3rem",marginBottom:"0.5rem"}}>{amt.type==="월"?`월 ${amt.amount.toLocaleString()}만원`:`${amt.amount.toLocaleString()}만원`}</div>}{modal["서비스목적요약"]&&<div style={{fontSize:"0.9rem",color:"#6C757D",lineHeight:1.6,marginBottom:"0.5rem"}}>{modal["서비스목적요약"]}</div>}</div>);})()}
+        {[["지원내용",modal["지원내용"]],["지원대상",modal["지원대상"]],["선정기준",modal["선정기준"]],["신청방법",modal["신청방법"]],["담당기관",modal["소관기관명"]],["문의",modal["전화문의"]]].map(([l,v])=>v?(<div key={l} style={{marginBottom:"1rem",paddingBottom:"1rem",borderBottom:"1px solid #F8F9FA"}}><div style={{fontWeight:700,color:"#ADB5BD",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:"0.3rem",fontSize:"0.72rem"}}>{l}</div><div style={{color:"#343A40",lineHeight:1.7,fontSize:"0.9rem"}}>{v}</div></div>):null)}
 
         {/* ── 신청 도우미 챗봇 ── */}
         <div style={{background:"#F7F8FA",borderRadius:"16px",padding:"1rem 1.25rem",marginBottom:"1rem"}}>
@@ -455,9 +450,9 @@ return(
           )}
         </div>
 
-        <a href={(detail?.["온라인신청URL"]||modal["온라인신청URL"])||"https://www.gov.kr/portal/service/serviceList"} target="_blank" rel="noopener noreferrer" style={{display:"block",padding:"1rem",background:"linear-gradient(135deg,#4C6EF5,#845EF7)",color:"white",border:"none",borderRadius:"14px",fontSize:"1rem",fontWeight:700,cursor:"pointer",textAlign:"center",textDecoration:"none",marginBottom:"0.75rem"}}>온라인 신청하기 →</a>
+        <a href={modal["온라인신청URL"]||"https://www.gov.kr/portal/service/serviceList"} target="_blank" rel="noopener noreferrer" style={{display:"block",padding:"1rem",background:"linear-gradient(135deg,#4C6EF5,#845EF7)",color:"white",border:"none",borderRadius:"14px",fontSize:"1rem",fontWeight:700,cursor:"pointer",textAlign:"center",textDecoration:"none",marginBottom:"0.75rem"}}>온라인 신청하기 →</a>
         <button onClick={()=>toggleSave(modal)} style={{width:"100%",padding:"0.875rem",fontSize:"0.95rem",fontWeight:600,background:saved.find(x=>x["서비스ID"]===modal["서비스ID"])?"#EEF2FF":"#F8F9FA",color:saved.find(x=>x["서비스ID"]===modal["서비스ID"])?"#4C6EF5":"#6C757D",border:"none",borderRadius:"14px",cursor:"pointer",minHeight:"44px"}}>{saved.find(x=>x["서비스ID"]===modal["서비스ID"])?"🔖 저장됨":"🔖 저장하기"}</button>
-      </>)}
+      </>)
     </div>
   </div>
 </div>)}
