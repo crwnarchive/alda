@@ -183,7 +183,7 @@ const completedCount=Object.values(checked).filter(Boolean).length;
 if(screen==="landing")return(
 <div style={{fontFamily:"'Pretendard','Apple SD Gothic Neo',sans-serif",minHeight:"100vh",background:"#F7F8FA",display:"flex",flexDirection:"column",paddingTop:"env(safe-area-inset-top)"}}>
 <div style={{padding:"1.25rem 1.5rem 0",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-  <div style={{fontSize:"1.1rem",fontWeight:"900",letterSpacing:"0.12em",color:"#1A1A2E"}}>ALDA</div>
+  <div style={{fontSize:"1.1rem",fontWeight:"900",letterSpacing:"-0.02em",color:"#1A1A2E"}}>알다</div>
   <div style={{fontSize:"0.8rem",color:"#ADB5BD",background:"#EAECF0",padding:"4px 10px",borderRadius:"20px"}}>정부 혜택 가이드</div>
 </div>
 <div style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"2rem 1.5rem 1rem",textAlign:"center"}}>
@@ -253,7 +253,7 @@ if(screen==="landing")return(
   </div>
 </div>
 <div style={{padding:"1rem 1.5rem 2rem",textAlign:"center",fontSize:"0.72rem",color:"#ADB5BD",lineHeight:1.6}}>
-  본 서비스는 행정안전부 공공데이터포털의 정보를 활용합니다<br/>
+  알다는 행정안전부 공공데이터포털의 정보를 활용합니다<br/>
   예상 금액은 참고용이며 실제 수혜액은 심사 결과에 따라 다를 수 있습니다
 </div>
 </div>);
