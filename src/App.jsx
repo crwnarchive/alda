@@ -147,6 +147,7 @@ export default function ALDA() {
   useEffect(()=>{ if(Object.keys(profile).length>0) localStorage.setItem("alda_profile",JSON.stringify(profile)); },[profile]);
   useEffect(()=>{ localStorage.setItem("alda_saved",JSON.stringify(saved)); },[saved]);
   useEffect(()=>{ localStorage.setItem("alda_checked",JSON.stringify(checked)); },[checked]);
+    const abortRef = useRef(null);
 
   const hasProfile = Object.keys(profile).length>=7;
 
@@ -183,14 +184,14 @@ export default function ALDA() {
   },[]);
 
   const openModal = useCallback(async(service)=>{
-    setDetail(null); setDetailLoading(true); setModal(service);
+    if(abortRef.current) abortRef.current.abort(); const controller=new AbortController(); abortRef.current=controller; setDetail(null); setDetailLoading(true); setModal(service);
     const id=service["서비스ID"];
     if(id) {
       try {
-        const res=await fetch(`${BASE_URL}/serviceDetail?serviceKey=${API_KEY}&serviceId=${id}`);
+        const res=await fetch(`${BASE_URL}/serviceDetail?serviceKey=${API_KEY}&serviceId=${id}`,{signal:controller.signal});
         const json=await res.json();
         setDetail(json.data?.[0]||null);
-      } catch {}
+      } catch(e) { if(e.name==='AbortError') return; }
     }
     setDetailLoading(false);
   },[]);
