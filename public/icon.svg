@@ -1,45 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4C6EF5"/>
-      <stop offset="100%" style="stop-color:#845EF7"/>
-    </linearGradient>
-    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.15"/>
-      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"/>
-    </linearGradient>
-  </defs>
+  <rect width="192" height="192" rx="42" fill="#4C6EF5"/>
+  <rect x="0" y="0" width="192" height="96" rx="42" fill="#6B8AF7" opacity="0.3"/>
 
-  <!-- 배경 라운드 사각형 -->
-  <rect width="192" height="192" rx="42" fill="url(#bg)"/>
+  <!-- 돋보기 원 -->
+  <circle cx="82" cy="80" r="36" fill="none" stroke="white" stroke-width="12" stroke-linecap="round"/>
 
-  <!-- 광택 효과 -->
-  <rect width="192" height="96" rx="42" fill="url(#shine)"/>
+  <!-- 돋보기 안 하이라이트 -->
+  <circle cx="72" cy="70" r="10" fill="white" opacity="0.15"/>
 
-  <!-- 별 장식 (우측 상단) -->
-  <g opacity="0.6">
-    <circle cx="152" cy="40" r="3" fill="white"/>
-    <circle cx="162" cy="32" r="2" fill="white"/>
-    <circle cx="145" cy="30" r="1.5" fill="white"/>
-  </g>
+  <!-- 돋보기 손잡이 -->
+  <line x1="108" y1="106" x2="148" y2="148" stroke="white" stroke-width="12" stroke-linecap="round"/>
 
-  <!-- 메인 'a' 글자 -->
-  <text
-    x="96"
-    y="118"
-    font-family="'Georgia', 'Times New Roman', serif"
-    font-size="96"
-    font-weight="700"
-    font-style="italic"
-    fill="white"
-    text-anchor="middle"
-    letter-spacing="-2"
-  >a</text>
+  <!-- 돋보기 안 원 (혜택 심볼) -->
+  <circle cx="82" cy="80" r="16" fill="white" opacity="0.15"/>
 
-  <!-- 하단 강조선 -->
-  <rect x="56" y="138" width="80" height="4" rx="2" fill="white" opacity="0.4"/>
-
-  <!-- 좌측 상단 작은 원 장식 -->
-  <circle cx="36" cy="38" r="6" fill="white" opacity="0.2"/>
-  <circle cx="36" cy="38" r="3" fill="white" opacity="0.3"/>
+  <!-- 별표 심볼 -->
+  <text x="82" y="87" font-family="'Apple SD Gothic Neo', sans-serif" font-size="22" font-weight="900" fill="white" text-anchor="middle" opacity="0.95">✦</text>
 </svg>
